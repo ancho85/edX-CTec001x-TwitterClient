@@ -39,7 +39,15 @@ public class LibsModule {
         return new GlideImageLoader(requestManager);
     }
 
+    @Provides
+    @Singleton
     RequestManager providesRequestManager(Fragment fragment){
         return Glide.with(fragment);
+    }
+
+    @Provides
+    @Singleton
+    Fragment providesFragment(){
+        return this.fragment;
     }
 }
