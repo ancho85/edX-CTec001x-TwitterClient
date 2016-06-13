@@ -1,5 +1,8 @@
 package edu.galileo.android.twitterclient.lib.di;
 
+import android.app.Fragment;
+
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
 import javax.inject.Singleton;
@@ -16,6 +19,7 @@ import edu.galileo.android.twitterclient.lib.base.ImageLoader;
  */
 @Module
 public class LibsModule {
+    private Fragment fragment;
 
     @Provides
     @Singleton
@@ -33,5 +37,9 @@ public class LibsModule {
     @Singleton
     ImageLoader providesImageLoader(RequestManager requestManager){
         return new GlideImageLoader(requestManager);
+    }
+
+    RequestManager providesRequestManager(Fragment fragment){
+        return Glide.with(fragment);
     }
 }
