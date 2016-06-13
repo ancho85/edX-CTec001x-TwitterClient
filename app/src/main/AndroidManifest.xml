@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="@string/FABRIC_API_KEY"/>
+            android:value="37ebdc387aa6546c0d54814bce714f57de45e352"/>
 
         <activity android:name=".LoginActivity">
             <intent-filter>
