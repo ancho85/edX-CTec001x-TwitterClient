@@ -2,6 +2,8 @@
 <manifest package="edu.galileo.android.twitterclient"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".TwitterClientApp"
         android:allowBackup="true"
@@ -20,7 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".main.MainActivity">
+        </activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

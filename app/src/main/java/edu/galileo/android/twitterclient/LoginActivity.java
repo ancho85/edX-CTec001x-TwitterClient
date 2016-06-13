@@ -1,5 +1,6 @@
 package edu.galileo.android.twitterclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.RelativeLayout;
@@ -12,6 +13,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import edu.galileo.android.twitterclient.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -39,6 +41,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void navigateToMainScreen() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
     }
+
+    private void navigateToMainScreen() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
+
 }
