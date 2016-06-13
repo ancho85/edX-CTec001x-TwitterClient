@@ -21,6 +21,10 @@ import edu.galileo.android.twitterclient.lib.base.ImageLoader;
 public class LibsModule {
     private Fragment fragment;
 
+    public LibsModule(Fragment fragment) {
+        this.fragment = fragment;
+    }
+
     @Provides
     @Singleton
     EventBus providesEventBus(org.greenrobot.eventbus.EventBus eventBus){
