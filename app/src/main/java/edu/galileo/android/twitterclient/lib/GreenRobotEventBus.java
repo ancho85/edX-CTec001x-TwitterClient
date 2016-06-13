@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient;
+package edu.galileo.android.twitterclient.lib;
 
 import edu.galileo.android.twitterclient.lib.base.EventBus;
 
