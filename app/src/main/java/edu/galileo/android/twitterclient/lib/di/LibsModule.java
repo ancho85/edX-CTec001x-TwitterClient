@@ -18,4 +18,10 @@ public class LibsModule {
     EventBus providesEventBus(org.greenrobot.eventbus.EventBus eventBus){
         return new GreenRobotEventBus(eventBus);
     }
+
+    @Provides
+    @Singleton
+    org.greenrobot.eventbus.EventBus providesLibraryEventBus(){
+        return org.greenrobot.eventbus.EventBus.getDefault();
+    }
 }
