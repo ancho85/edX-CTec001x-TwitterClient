@@ -1,22 +1,36 @@
 package edu.galileo.android.twitterclient.main.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.twitter.sdk.android.Twitter;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.LoginActivity;
 import edu.galileo.android.twitterclient.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.tabs)
+    TabLayout tabs;
+    @Bind(R.id.container)
+    ViewPager container;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
     }
 
     @Override
