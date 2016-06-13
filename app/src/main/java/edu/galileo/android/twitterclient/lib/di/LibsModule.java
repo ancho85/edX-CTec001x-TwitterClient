@@ -1,11 +1,15 @@
 package edu.galileo.android.twitterclient.lib.di;
 
+import com.bumptech.glide.RequestManager;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import edu.galileo.android.twitterclient.lib.GlideImageLoader;
 import edu.galileo.android.twitterclient.lib.GreenRobotEventBus;
 import edu.galileo.android.twitterclient.lib.base.EventBus;
+import edu.galileo.android.twitterclient.lib.base.ImageLoader;
 
 /**
  * Created by carlos.gomez on 13/06/2016.
@@ -23,5 +27,11 @@ public class LibsModule {
     @Singleton
     org.greenrobot.eventbus.EventBus providesLibraryEventBus(){
         return org.greenrobot.eventbus.EventBus.getDefault();
+    }
+
+    @Provides
+    @Singleton
+    ImageLoader providesImageLoader(RequestManager requestManager){
+        return new GlideImageLoader(requestManager);
     }
 }
