@@ -3,7 +3,7 @@ package edu.galileo.android.twitterclient.hashtags;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.models.MediaEntity;
+import com.twitter.sdk.android.core.models.HashtagEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 
 import java.util.ArrayList;
@@ -34,37 +34,32 @@ public class HashtagsRepositoryImpl implements HashtagsRepository {
         Callback<List<Tweet>> callback = new Callback<List<Tweet>>() {
             @Override
             public void success(Result<List<Tweet>> result) {
-                /*List<Image> items = new ArrayList<Image>();
+                List<Hashtag> items = new ArrayList<Hashtag>();
                 for (Tweet tweet : result.data) {
                     if (containsHashtags(tweet)) {
-                        Image tweetModel = new Image();
+                        Hashtag tweetModel = new Hashtag();
 
                         tweetModel.setId(tweet.idStr);
                         tweetModel.setFavoriteCount(tweet.favoriteCount);
+                        tweetModel.setTweetText(tweet.text);
 
-                        String tweetText = tweet.text;
-                        int index = tweetText.indexOf("http");
-                        if (index > 0) {
-                            tweetText = tweetText.substring(0, index);
+                        List<String> hashtags = new ArrayList<String>();
+                        for (HashtagEntity hashtag : tweet.entities.hashtags) {
+                            hashtags.add(hashtag.text);
                         }
-                        tweetModel.setTweetText(tweetText);
-
-                        MediaEntity currentPhoto = tweet.entities.media.get(0);
-                        String imageUrl = currentPhoto.mediaUrl;
-                        tweetModel.setImageURL(imageUrl);
-
+                        tweetModel.setHashtags(hashtags);
                         items.add(tweetModel);
                     }
                 }
 
                 //orden por cantidad de favoritos
-                Collections.sort(items, new Comparator<Image>() {
+                Collections.sort(items, new Comparator<Hashtag>() {
                     @Override
-                    public int compare(Image image1, Image image2) {
-                        return image2.getFavoriteCount() - image1.getFavoriteCount();
+                    public int compare(Hashtag hashtag1, Hashtag hashtag2) {
+                        return hashtag2.getFavoriteCount() - hashtag1.getFavoriteCount();
                     }
                 });
-                post(items);*/
+                post(items);
             }
 
             @Override
@@ -77,8 +72,8 @@ public class HashtagsRepositoryImpl implements HashtagsRepository {
 
     private boolean containsHashtags(Tweet tweet) {
         return tweet.entities != null &&
-                tweet.entities.media != null &&
-                !tweet.entities.media.isEmpty();
+                tweet.entities.hashtags != null &&
+                !tweet.entities.hashtags.isEmpty();
     }
 
     private void post(List<Hashtag> hashtags) {
