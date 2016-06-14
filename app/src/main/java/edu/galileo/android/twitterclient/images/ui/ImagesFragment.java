@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,15 @@ public class ImagesFragment extends Fragment implements ImagesView, OnItemClickL
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
         setupInjection();
+        setupRecyclerView();
+        presenter.getImageTweets();
         return view;
+    }
+
+    private void setupRecyclerView() {
+        //esto debe ser llamado después de la inyección
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2)); //2 columnas para el grid layout
+        recyclerView.setAdapter(adapter); // la inyección prepara al adapter, por lo que en este punto ya debió ocurrir la inyección
     }
 
     private void setupInjection() {

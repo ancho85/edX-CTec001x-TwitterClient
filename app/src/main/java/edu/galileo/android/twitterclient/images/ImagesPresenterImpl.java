@@ -1,5 +1,7 @@
 package edu.galileo.android.twitterclient.images;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import edu.galileo.android.twitterclient.images.events.ImagesEvent;
 import edu.galileo.android.twitterclient.images.ui.ImagesView;
 import edu.galileo.android.twitterclient.lib.base.EventBus;
@@ -35,7 +37,7 @@ public class ImagesPresenterImpl implements ImagesPresenter {
 
     @Override
     public void getImageTweets() {
-        if (view != null){
+        if (view != null) {
             view.hideImages();
             view.showProgress();
         }
@@ -43,14 +45,15 @@ public class ImagesPresenterImpl implements ImagesPresenter {
     }
 
     @Override
+    @Subscribe
     public void onEventMainThread(ImagesEvent event) {
         String errorMsg = event.getError();
-        if (view != null){
+        if (view != null) {
             view.showImages();
             view.hideProgress();
-            if (errorMsg != null){
+            if (errorMsg != null) {
                 view.onError(errorMsg);
-            }else{
+            } else {
                 view.setContent(event.getImages());
             }
         }
