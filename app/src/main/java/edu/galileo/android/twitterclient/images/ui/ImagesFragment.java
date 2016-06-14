@@ -15,11 +15,15 @@ import android.widget.ProgressBar;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.twitterclient.R;
+import edu.galileo.android.twitterclient.TwitterClientApp;
 import edu.galileo.android.twitterclient.entities.Image;
 import edu.galileo.android.twitterclient.images.ImagesPresenter;
+import edu.galileo.android.twitterclient.images.di.ImagesComponent;
 import edu.galileo.android.twitterclient.images.ui.adapters.ImagesAdapter;
 import edu.galileo.android.twitterclient.images.ui.adapters.OnItemClickListener;
 
@@ -35,7 +39,9 @@ public class ImagesFragment extends Fragment implements ImagesView, OnItemClickL
     @Bind(R.id.container)
     FrameLayout container;
 
+    @Inject
     ImagesAdapter adapter;
+    @Inject
     ImagesPresenter presenter;
 
     public ImagesFragment() {
@@ -47,7 +53,22 @@ public class ImagesFragment extends Fragment implements ImagesView, OnItemClickL
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         ButterKnife.bind(this, view);
+        setupInjection();
         return view;
+    }
+
+    private void setupInjection() {
+        //después del binding especificar al target que use la inyección de dependencias.
+        // Ejecutar Make Project (en Android Studio) para que dagger compile y genere objetos que sirven en la inyección
+        TwitterClientApp app = (TwitterClientApp)getActivity().getApplication();
+        //this 3 veces porque esta clase es un fragmento que implementa la vista y el listener
+        ImagesComponent imagesComponent = app.getImagesComponent(this, this, this);
+        //inyección de tipo 2
+        // adapter = imagesComponent.getAdapter();
+        // presenter = imagesComponent.getPresenter()
+
+        //inyección de tipo 1
+        imagesComponent.inject(this);
     }
 
     @Override
