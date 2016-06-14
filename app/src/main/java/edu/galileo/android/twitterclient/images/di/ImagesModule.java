@@ -1,5 +1,6 @@
 package edu.galileo.android.twitterclient.images.di;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Singleton;
@@ -36,5 +37,19 @@ public class ImagesModule {
     @Singleton
     ImagesAdapter providesAdapter(List<Image> items, ImageLoader imageLoader, OnItemClickListener clickListener){
         return new ImagesAdapter(items, imageLoader, clickListener);
+    }
+
+    //Devolver el listener definido en el constructor
+    @Provides
+    @Singleton
+    OnItemClickListener providesOnItemClickListener(){
+        return this.clickListener;
+    }
+
+    //Devolver el listado de imágenes
+    @Provides
+    @Singleton
+    List<Image> providesItemsList(){
+        return new ArrayList<Image>();
     }
 }
