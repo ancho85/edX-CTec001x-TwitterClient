@@ -1,20 +1,20 @@
-package edu.galileo.android.twitterclient.images;
+package edu.galileo.android.twitterclient.hashtags;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import edu.galileo.android.twitterclient.images.events.ImagesEvent;
-import edu.galileo.android.twitterclient.images.ui.ImagesView;
+import edu.galileo.android.twitterclient.hashtags.events.HashtagsEvent;
+import edu.galileo.android.twitterclient.hashtags.ui.HashtagsView;
 import edu.galileo.android.twitterclient.lib.base.EventBus;
 
 /**
  * Created by carlos.gomez on 13/06/2016.
  */
-public class ImagesPresenterImpl implements ImagesPresenter {
-    private ImagesView view;
+public class HashtagsPresenterImpl implements HashtagsPresenter {
+    private HashtagsView view;
     private EventBus eventBus;
-    private ImagesInteractor interactor;
+    private HashtagsInteractor interactor;
 
-    public ImagesPresenterImpl(ImagesView view, EventBus eventBus, ImagesInteractor interactor) {
+    public HashtagsPresenterImpl(HashtagsView view, EventBus eventBus, HashtagsInteractor interactor) {
         this.view = view;
         this.eventBus = eventBus;
         this.interactor = interactor;
@@ -36,7 +36,7 @@ public class ImagesPresenterImpl implements ImagesPresenter {
     }
 
     @Override
-    public void getImageTweets() {
+    public void getHashtagTweets() {
         if (view != null) {
             view.hideImages();
             view.showProgress();
@@ -46,7 +46,7 @@ public class ImagesPresenterImpl implements ImagesPresenter {
 
     @Override
     @Subscribe
-    public void onEventMainThread(ImagesEvent event) {
+    public void onEventMainThread(HashtagsEvent event) {
         String errorMsg = event.getError();
         if (view != null) {
             view.showImages();
@@ -54,7 +54,7 @@ public class ImagesPresenterImpl implements ImagesPresenter {
             if (errorMsg != null) {
                 view.onError(errorMsg);
             } else {
-                view.setContent(event.getImages());
+                view.setContent(event.getHashtags());
             }
         }
     }

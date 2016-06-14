@@ -1,10 +1,10 @@
-package edu.galileo.android.twitterclient.images.ui.adapters;
+package edu.galileo.android.twitterclient.hashtags.ui.adapters;
 
-import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.entities.Hashtag;
 
 /**
  * Created by carlos.gomez on 13/06/2016.
  */
 public interface OnItemClickListener {
-    void onItemClick(Image image);
+    void onItemClick(Hashtag hashtag);
 }

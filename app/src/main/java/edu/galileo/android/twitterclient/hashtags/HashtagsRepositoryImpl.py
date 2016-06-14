@@ -1,4 +1,4 @@
-package edu.galileo.android.twitterclient.images;
+package edu.galileo.android.twitterclient.hashtags;
 
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -12,31 +12,31 @@ import java.util.Comparator;
 import java.util.List;
 
 import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
-import edu.galileo.android.twitterclient.entities.Image;
-import edu.galileo.android.twitterclient.images.events.ImagesEvent;
+import edu.galileo.android.twitterclient.entities.Hashtag;
+import edu.galileo.android.twitterclient.hashtags.events.HashtagsEvent;
 import edu.galileo.android.twitterclient.lib.base.EventBus;
 
 /**
  * Created by carlos.gomez on 14/06/2016.
  */
-public class ImagesRepositoryImpl implements ImagesRepository {
+public class HashtagsRepositoryImpl implements HashtagsRepository {
     private EventBus eventBus;
     private CustomTwitterApiClient client;
     private final static int TWEET_COUNT = 100;
 
-    public ImagesRepositoryImpl(EventBus eventBus, CustomTwitterApiClient client) {
+    public HashtagsRepositoryImpl(EventBus eventBus, CustomTwitterApiClient client) {
         this.eventBus = eventBus;
         this.client = client;
     }
 
     @Override
-    public void getImages() {
+    public void getHashtags() {
         Callback<List<Tweet>> callback = new Callback<List<Tweet>>() {
             @Override
             public void success(Result<List<Tweet>> result) {
-                List<Image> items = new ArrayList<Image>();
+                /*List<Image> items = new ArrayList<Image>();
                 for (Tweet tweet : result.data) {
-                    if (containsImages(tweet)) {
+                    if (containsHashtags(tweet)) {
                         Image tweetModel = new Image();
 
                         tweetModel.setId(tweet.idStr);
@@ -64,7 +64,7 @@ public class ImagesRepositoryImpl implements ImagesRepository {
                         return image2.getFavoriteCount() - image1.getFavoriteCount();
                     }
                 });
-                post(items);
+                post(items);*/
             }
 
             @Override
@@ -75,24 +75,24 @@ public class ImagesRepositoryImpl implements ImagesRepository {
         client.getTimelineService().homeTimeline(TWEET_COUNT, true, true, true, true, callback);
     }
 
-    private boolean containsImages(Tweet tweet) {
+    private boolean containsHashtags(Tweet tweet) {
         return tweet.entities != null &&
                 tweet.entities.media != null &&
                 !tweet.entities.media.isEmpty();
     }
 
-    private void post(List<Image> items) {
-        post(items, null);
+    private void post(List<Hashtag> hashtags) {
+        post(hashtags, null);
     }
 
     private void post(String error) {
         post(null, error);
     }
 
-    private void post(List<Image> items, String error) {
-        ImagesEvent event = new ImagesEvent();
+    private void post(List<Hashtag> hashtags, String error) {
+        HashtagsEvent event = new HashtagsEvent();
         event.setError(error);
-        event.setImages(items);
+        event.setHashtags(hashtags);
         eventBus.post(event);
     }
 }

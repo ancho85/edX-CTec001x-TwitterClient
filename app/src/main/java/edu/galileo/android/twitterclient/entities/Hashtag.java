@@ -1,13 +1,16 @@
 package edu.galileo.android.twitterclient.entities;
 
+import java.util.List;
+
 /**
  * Created by carlos.gomez on 13/06/2016.
  */
-public class Image {
+public class Hashtag {
     private String id;
-    private String imageURL;
     private String tweetText;
     private int favoriteCount;
+    private List<String> hashtags;
+
     //al acceder a un contenido por su identificador, twitter trata de redirigir a la versión móbil
     // es por esto que se usa este URL base
     private final static String BASE_TWEET_URL = "https://twitter.com/null/status/";
@@ -20,12 +23,12 @@ public class Image {
         this.id = id;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public List<String> getHashtags() {
+        return hashtags;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setHashtags(List<String> hashtags) {
+        this.hashtags = hashtags;
     }
 
     public String getTweetText() {

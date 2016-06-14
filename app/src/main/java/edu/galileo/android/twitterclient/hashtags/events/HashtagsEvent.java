@@ -1,15 +1,15 @@
-package edu.galileo.android.twitterclient.images.events;
+package edu.galileo.android.twitterclient.hashtags.events;
 
 import java.util.List;
 
-import edu.galileo.android.twitterclient.entities.Image;
+import edu.galileo.android.twitterclient.entities.Hashtag;
 
 /**
  * Created by carlos.gomez on 13/06/2016.
  */
-public class ImagesEvent {
+public class HashtagsEvent {
     private String error;
-    private List<Image> images;
+    private List<Hashtag> hashtags;
 
     public String getError() {
         return error;
@@ -19,11 +19,11 @@ public class ImagesEvent {
         this.error = error;
     }
 
-    public List<Image> getImages() {
-        return images;
+    public List<Hashtag> getHashtags() {
+        return hashtags;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
+    public void setHashtags(List<Hashtag> hashtags) {
+        this.hashtags = hashtags;
     }
 }
