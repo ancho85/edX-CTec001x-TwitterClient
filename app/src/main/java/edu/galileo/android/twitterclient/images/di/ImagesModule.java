@@ -1,5 +1,8 @@
 package edu.galileo.android.twitterclient.images.di;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Session;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +10,14 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import edu.galileo.android.twitterclient.api.CustomTwitterApiClient;
 import edu.galileo.android.twitterclient.entities.Image;
 import edu.galileo.android.twitterclient.images.ImagesInteractor;
 import edu.galileo.android.twitterclient.images.ImagesInteractorImpl;
 import edu.galileo.android.twitterclient.images.ImagesPresenter;
 import edu.galileo.android.twitterclient.images.ImagesPresenterImpl;
 import edu.galileo.android.twitterclient.images.ImagesRepository;
+import edu.galileo.android.twitterclient.images.ImagesRepositoryImpl;
 import edu.galileo.android.twitterclient.images.ui.ImagesView;
 import edu.galileo.android.twitterclient.images.ui.adapters.ImagesAdapter;
 import edu.galileo.android.twitterclient.images.ui.adapters.OnItemClickListener;
@@ -83,5 +88,25 @@ public class ImagesModule {
         return new ImagesInteractorImpl(repository);
     }
 
-    
+    //El interactor recibe un repository como parámetro, aquí se definen los @Provides para devolver ImagesRepositoryImpl
+    // eventBus también provee la libería LibsModule
+    @Provides
+    @Singleton
+    ImagesRepository providesImagesRepository(EventBus eventBus, CustomTwitterApiClient client) {
+        return new ImagesRepositoryImpl(eventBus, client);
+    }
+
+    //Devolver el api client. El parámetro es un Session de twitter core
+    @Provides
+    @Singleton
+    CustomTwitterApiClient providesCustomTwitterApiClient(Session session) {
+        return new CustomTwitterApiClient(session);
+    }
+
+    //Devolver la sesión de twitter
+    @Provides
+    @Singleton
+    Session providesTwitterSession(){
+        return Twitter.getSessionManager().getActiveSession();
+    }
 }
