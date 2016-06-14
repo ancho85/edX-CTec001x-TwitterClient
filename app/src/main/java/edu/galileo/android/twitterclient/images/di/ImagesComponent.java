@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import edu.galileo.android.twitterclient.images.ImagesPresenter;
 import edu.galileo.android.twitterclient.images.ui.ImagesFragment;
+import edu.galileo.android.twitterclient.images.ui.adapters.ImagesAdapter;
 import edu.galileo.android.twitterclient.lib.di.LibsModule;
 
 /**
@@ -18,4 +19,5 @@ public interface ImagesComponent {
 
     //inyección tipo 2. En el módulo se definen los provides y este método abajo lo llamo en base al componente
     ImagesPresenter getPresenter();
+    ImagesAdapter getAdapter();
 }
