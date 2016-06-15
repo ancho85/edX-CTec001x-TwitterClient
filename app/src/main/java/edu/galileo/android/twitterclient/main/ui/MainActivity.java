@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         setUpAdapter();
+
+        setTitle(String.format(
+                            getString(R.string.main_header_hello_user),
+                            Twitter.getSessionManager().getActiveSession().getUserName()));
     }
 
     private void setUpAdapter() {

@@ -4,4 +4,5 @@
     <string name="main.header.images">Imágenes</string>
     <string name="main.header.hashtags">Hashtags</string>
     <string name="main.menu.action.logout">Cerrar sesión</string>
+    <string name="main.header.hello_user">Hola %s</string>
 </resources>
